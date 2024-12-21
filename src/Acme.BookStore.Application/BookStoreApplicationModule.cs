@@ -18,8 +18,8 @@ namespace Acme.BookStore;
     typeof(AbpIdentityApplicationModule),
     typeof(AbpAccountApplicationModule),
     typeof(AbpTenantManagementApplicationModule),
-    typeof(AbpSettingManagementApplicationModule)
-    // typeof(AbpLocalizationModule)
+    typeof(AbpSettingManagementApplicationModule),
+    typeof(AbpLocalizationModule)
     )]
 public class BookStoreApplicationModule : AbpModule
 {
@@ -31,7 +31,7 @@ public class BookStoreApplicationModule : AbpModule
         });
         Configure<AbpLocalizationOptions>(options =>
         {
-            options.Languages.Add(new LanguageInfo("vi", "VN", "Tiếng Việt"));
+            options.Languages.Add(new LanguageInfo("vi", "vi", "Tiếng Việt"));
             /* options.Languages.Add(new LanguageInfo("en", "US", "English")); */
         });
     }
