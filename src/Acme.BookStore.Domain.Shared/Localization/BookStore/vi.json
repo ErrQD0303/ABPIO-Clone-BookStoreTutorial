@@ -26,6 +26,11 @@
     "Enum:BookType.5": "Kinh dị",
     "Enum:BookType.6": "Khoa học",
     "Enum:BookType.7": "Khoa học viễn tưởng",
-    "Enum:BookType.8": "Thơ ca"
+    "Enum:BookType.8": "Thơ ca",
+    "Permission:BookStore": "Cửa hàng sách",
+    "Permission:Books": "Quản lý sách",
+    "Permission:Books.Create": "Tạo sách mới",
+    "Permission:Books.Edit": "Chỉnh sửa sách",
+    "Permission:Books.Delete": "Xóa sách"
   }
 }
