@@ -32,6 +32,10 @@
     "Permission:Books.Create": "Tạo sách mới",
     "Permission:Books.Edit": "Chỉnh sửa sách",
     "Permission:Books.Delete": "Xóa sách",
-    "BookStore:00001": "Đã có một tác giả với cùng tên trong hệ thống: {name}"
+    "BookStore:00001": "Đã có một tác giả với cùng tên trong hệ thống: {name}",
+    "Permission:Authors": "Quan lý tác giả",
+    "Permission:Authors.Create": "Tạo tác giả mới",
+    "Permission:Authors.Edit": "Chinh sửa tác giả",
+    "Permission:Authors.Delete": "Xóa tác giả"
   }
 }
