@@ -31,6 +31,7 @@
     "Permission:Books": "Quản lý sách",
     "Permission:Books.Create": "Tạo sách mới",
     "Permission:Books.Edit": "Chỉnh sửa sách",
-    "Permission:Books.Delete": "Xóa sách"
+    "Permission:Books.Delete": "Xóa sách",
+    "BookStore:00001": "Đã có một tác giả với cùng tên trong hệ thống: {name}"
   }
 }
