@@ -1,10 +1,12 @@
 import { ListService, PagedResultDto } from "@abp/ng.core";
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { BookService, BookDto, bookTypeOptions } from "@proxy/books";
+import { BookService, BookDto, bookTypeOptions, AuthorLookupDto } from "@proxy/books";
 
 import { NgbDateNativeAdapter, NgbDateAdapter } from "@ng-bootstrap/ng-bootstrap";
 import { ConfirmationService, Confirmation } from "@abp/ng.theme.shared";
+import { Observable } from "rxjs/internal/Observable";
+import { map } from "rxjs/internal/operators/map";
 
 @Component({
   selector: "app-book",
@@ -16,6 +18,8 @@ export class BookComponent implements OnInit {
   book = { items: [], totalCount: 0 } as PagedResultDto<BookDto>;
 
   selectedBook = {} as BookDto; // declare selectedBook
+
+  authors$: Observable<AuthorLookupDto[]>;
 
   form: FormGroup;
 
@@ -29,7 +33,9 @@ export class BookComponent implements OnInit {
     private bookService: BookService,
     private fb: FormBuilder, // inject FormBuilder
     private confirmation: ConfirmationService // inject ConfirmationService
-  ) {}
+  ) {
+    this.authors$ = bookService.getAuthorLookup().pipe(map(r => r.items));
+  }
 
   ngOnInit() {
     const bookStreamCreator = query => this.bookService.getList(query);
@@ -67,6 +73,7 @@ export class BookComponent implements OnInit {
   // add buildForm method
   buildForm() {
     this.form = this.fb.group({
+      authorId: [this.selectedBook.authorId || null, Validators.required],
       name: [this.selectedBook.name || "", Validators.required], // Default value to Empty STring and Required
       type: [this.selectedBook.type || null, Validators.required],
       publishDate: [

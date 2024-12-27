@@ -60,8 +60,11 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
     {
         if (await _openIddictScopeRepository.FindByNameAsync("BookStore") == null)
         {
-            await _scopeManager.CreateAsync(new OpenIddictScopeDescriptor {
-                Name = "BookStore", DisplayName = "BookStore API", Resources = { "BookStore" }
+            await _scopeManager.CreateAsync(new OpenIddictScopeDescriptor
+            {
+                Name = "BookStore",
+                DisplayName = "BookStore API",
+                Resources = { "BookStore" }
             });
         }
     }
@@ -108,8 +111,8 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
             );
         }
 
-        
-        
+
+
 
 
 
@@ -131,6 +134,27 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                 scopes: commonScopes,
                 redirectUri: $"{swaggerRootUrl}/swagger/oauth2-redirect.html",
                 clientUri: swaggerRootUrl,
+                logoUri: "/images/clients/swagger.svg"
+            );
+        }
+
+        // Swagger Client
+        var postmanClientId = configurationSection["Postman:ClientId"];
+        if (!postmanClientId.IsNullOrWhiteSpace())
+        {
+            var postmanRootUrl = configurationSection["Postman:RootUrl"]?.TrimEnd('/');
+
+            await CreateApplicationAsync(
+                applicationType: OpenIddictConstants.ApplicationTypes.Web,
+                name: postmanClientId!,
+                type: OpenIddictConstants.ClientTypes.Public,
+                consentType: OpenIddictConstants.ConsentTypes.Implicit,
+                displayName: "Postman Application",
+                secret: null,
+                grantTypes: new List<string> { OpenIddictConstants.GrantTypes.AuthorizationCode, },
+                scopes: commonScopes,
+                redirectUri: configurationSection["Postman:RedirectUri"],
+                clientUri: postmanRootUrl,
                 logoUri: "/images/clients/swagger.svg"
             );
         }
@@ -167,7 +191,8 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
 
         var client = await _openIddictApplicationRepository.FindByClientIdAsync(name);
 
-        var application = new AbpApplicationDescriptor {
+        var application = new AbpApplicationDescriptor
+        {
             ApplicationType = applicationType,
             ClientId = name,
             ClientType = type,

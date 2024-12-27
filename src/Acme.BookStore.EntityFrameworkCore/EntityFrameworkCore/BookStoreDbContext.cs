@@ -102,6 +102,12 @@ public class BookStoreDbContext :
                 .HasMaxLength(BookConsts.MaxNameLength);
 
             b.HasIndex(x => x.Name);
+
+            // ADD THE MAPPING FOR THE RELATION
+            b.HasOne<Author>()
+                .WithMany()
+                .HasForeignKey(x => x.AuthorId)
+                .IsRequired();
         });
 
         builder.Entity<Author>(b =>

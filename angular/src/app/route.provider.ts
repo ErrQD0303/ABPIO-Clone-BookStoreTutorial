@@ -21,7 +21,7 @@ function configureRoutes(routes: RoutesService) {
         iconClass: "fas fa-book",
         order: 2,
         layout: eLayoutType.application,
-        requiredPolicy: "BookStore.Books", //Need user to have this permission to access this page
+        requiredPolicy: "BookStore.Books || BookStore.Authors", //Need user to have this permission to access this page
       },
       {
         path: "/books",
@@ -29,6 +29,13 @@ function configureRoutes(routes: RoutesService) {
         parentName: "::Menu:BookStore",
         layout: eLayoutType.application,
         requiredPolicy: "BookStore.Books", //Need user to have this permission to access this page
+      },
+      {
+        path: "/authors",
+        name: "::Menu:Authors",
+        parentName: "::Menu:BookStore",
+        layout: eLayoutType.application,
+        requiredPolicy: "BookStore.Authors", //Need user to have this permission to access this page
       },
     ]);
   };

@@ -50,7 +50,7 @@
 
               <!-- add the Delete button -->
               <button
-                *abpPermission="'BookSTore.Books.Delete'"
+                *abpPermission="'BookStore.Books.Delete'"
                 ngbDropdownItem
                 (click)="delete(row.id)"
               >
@@ -62,6 +62,13 @@
       </ngx-datatable-column>
 
       <ngx-datatable-column [name]="'::Name' | abpLocalization" prop="name"></ngx-datatable-column>
+
+      <ngx-datatable-column
+        [name]="'::Author' | abpLocalization"
+        prop="authorName"
+        [sortable]="false"
+      >
+      </ngx-datatable-column>
 
       <ngx-datatable-column [name]="'::Type' | abpLocalization" prop="type">
         <ng-template let-row="row" ngx-datatable-cell-template>
@@ -92,6 +99,16 @@
 
   <ng-template #abpBody>
     <form [formGroup]="form" (ngSubmit)="save()">
+      <div class="form-group">
+        <label for="author-id"></label><span> * </span>
+        <select id="author-id" class="form-control" formControlName="authorId">
+          <option [ngValue]="null">Select Author</option>
+          <option [ngValue]="author.id" *ngFor="let author of authors$ | async">
+            {{ author.name }}
+          </option>
+        </select>
+      </div>
+
       <div class="mt-2">
         <label for="book-name">Name</label><span> * </span>
         <input type="text" id="book-name" class="form-control" formControlName="name" autofocus />

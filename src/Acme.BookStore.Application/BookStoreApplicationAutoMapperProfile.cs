@@ -14,6 +14,7 @@ public class BookStoreApplicationAutoMapperProfile : Profile
         // Books
         CreateMap<Book, BookDto>(); // Map from Book to BookDto
         CreateMap<CreateUpdateBookDto, Book>(); // Map from UpdateBookDto to Book
+        CreateMap<Author, AuthorLookupDto>(); // Map from Author to AuthorLookupDto
 
         // Authors
         // Because we only Map Author -> AuthorDto, so we don't need to map UpdateAuthorDto -> AuthorDto or CreateAuthorDto -> AuthorDto

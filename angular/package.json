@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "clean": "ng cache clean",
+    "build": "ng build --verbose",
     "build:prod": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
@@ -13,6 +14,7 @@
   "private": true,
   "dependencies": {
     "17": "^0.0.0",
+    "18": "^0.0.0",
     "@abp/ng.account": "~9.0.2",
     "@abp/ng.components": "~9.0.2",
     "@abp/ng.core": "~9.0.2",

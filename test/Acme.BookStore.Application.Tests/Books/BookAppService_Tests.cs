@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Acme.BookStore.Authors;
 using Shouldly;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Modularity;
@@ -13,10 +14,12 @@ public abstract class BookAppService_Tests<TStartupModule> : BookStoreApplicatio
 where TStartupModule : IAbpModule
 {
     private readonly IBookAppService _bookAppService;
+    private readonly IAuthorAppService _authorAppService;
 
     protected BookAppService_Tests()
     {
         _bookAppService = GetRequiredService<IBookAppService>();
+        _authorAppService = GetRequiredService<IAuthorAppService>();
     }
 
     [Fact] // Xunit A-A-A: Arrange, Act, Assert
@@ -29,16 +32,21 @@ where TStartupModule : IAbpModule
 
         //Assert
         result.TotalCount.ShouldBeGreaterThanOrEqualTo(5);
-        result.Items.ShouldContain(b => b.Name == "1984");
+        result.Items.ShouldContain(b => b.Name == "1984" &&
+            b.AuthorName == "George Orwell");
     }
 
     [Fact]
     public async Task Should_Create_A_Valid_Book()
     {
+        var author = await _authorAppService.GetListAsync(new GetAuthorListDto());
+        var firstAuthor = author.Items.First();
+
         //Act
         var result = await _bookAppService.CreateAsync(
             new CreateUpdateBookDto
             {
+                AuthorId = firstAuthor.Id,
                 Name = "New test book 42",
                 Price = 10,
                 PublishDate = DateTime.Now,

@@ -12,5 +12,13 @@ namespace Acme.BookStore.Books
         public BookType Type { get; set; }
         public DateTime PublishDate { get; set; }
         public float Price { get; set; }
+
+        // many to one relationship
+        public Guid AuthorId { get; set; } // DDD best practice: Do not use Navigation Properties in Aggregates
+        /* After adding this property, we will need to fix the database's Book data. There are 3 solutions you can do:
+        1. If you haven't published your application to the production yet, you can just delete existing books in the database, or you can even delete the entire database in your development environment
+        2. You can update the existing data programmatically on data migration or seed phase
+        3. You can manuallyhandle it on the database
+        => Prefer DROP THE DATABASE */
     }
 }

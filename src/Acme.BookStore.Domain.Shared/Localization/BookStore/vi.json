@@ -36,6 +36,11 @@
     "Permission:Authors": "Quan lý tác giả",
     "Permission:Authors.Create": "Tạo tác giả mới",
     "Permission:Authors.Edit": "Chinh sửa tác giả",
-    "Permission:Authors.Delete": "Xóa tác giả"
+    "Permission:Authors.Delete": "Xóa tác giả",
+    "Menu:Authors": "Tác giả",
+    "Authors": "Tác giả",
+    "AuthorDeletionConfirmationMessage": "Bạn có muốn xóa tác giả '{0}' không?",
+    "BirthDate": "Ngày sinh",
+    "NewAuthor": "Tạo tác giả mới"
   }
 }
