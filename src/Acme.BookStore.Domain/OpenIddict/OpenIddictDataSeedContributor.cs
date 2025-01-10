@@ -111,12 +111,6 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
             );
         }
 
-
-
-
-
-
-
         // Swagger Client
         var swaggerClientId = configurationSection["BookStore_Swagger:ClientId"];
         if (!swaggerClientId.IsNullOrWhiteSpace())
@@ -138,7 +132,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
             );
         }
 
-        // Swagger Client
+        // Postman Client
         var postmanClientId = configurationSection["Postman:ClientId"];
         if (!postmanClientId.IsNullOrWhiteSpace())
         {
@@ -151,7 +145,14 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                 consentType: OpenIddictConstants.ConsentTypes.Implicit,
                 displayName: "Postman Application",
                 secret: null,
-                grantTypes: new List<string> { OpenIddictConstants.GrantTypes.AuthorizationCode, },
+                grantTypes: new List<string> {
+                    OpenIddictConstants.GrantTypes.AuthorizationCode,
+                    OpenIddictConstants.GrantTypes.Password,
+                    OpenIddictConstants.GrantTypes.ClientCredentials,
+                    OpenIddictConstants.GrantTypes.RefreshToken,
+                    "LinkLogin",
+                    "Impersonation"
+                },
                 scopes: commonScopes,
                 redirectUri: configurationSection["Postman:RedirectUri"],
                 clientUri: postmanRootUrl,
@@ -159,7 +160,33 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
             );
         }
 
+        // React Client
+        var reactClientId = configurationSection["React:ClientId"];
+        if (!reactClientId.IsNullOrWhiteSpace())
+        {
+            var reactRootUrl = configurationSection["React:RootUrl"]?.TrimEnd('/');
 
+            await CreateApplicationAsync(
+                applicationType: OpenIddictConstants.ApplicationTypes.Web,
+                name: reactClientId!,
+                type: OpenIddictConstants.ClientTypes.Public,
+                consentType: OpenIddictConstants.ConsentTypes.Implicit,
+                displayName: "React Application",
+                secret: null,
+                grantTypes: new List<string> {
+                    OpenIddictConstants.GrantTypes.AuthorizationCode,
+                    OpenIddictConstants.GrantTypes.Password,
+                    OpenIddictConstants.GrantTypes.ClientCredentials,
+                    OpenIddictConstants.GrantTypes.RefreshToken,
+                    "LinkLogin",
+                    "Impersonation"
+                },
+                scopes: commonScopes,
+                redirectUri: configurationSection["React:RedirectUri"],
+                clientUri: reactRootUrl,
+                logoUri: "/images/clients/swagger.svg"
+            );
+        }
     }
 
     private async Task CreateApplicationAsync(
