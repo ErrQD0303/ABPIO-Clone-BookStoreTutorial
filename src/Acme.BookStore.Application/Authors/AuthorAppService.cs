@@ -23,12 +23,14 @@ public class AuthorAppService : BookStoreAppService, IAuthorAppService
     }
 
     // ...SERVICE METHODS WILL BE IMPLEMENTED HERE...
+    [AllowAnonymous] // Suppress the authorization check for this method
     public async Task<AuthorDto> GetAsync(Guid id)
     {
         var author = await _authorRepository.GetAsync(id);
         return ObjectMapper.Map<Author, AuthorDto>(author);
     }
 
+    [AllowAnonymous] // Suppress the authorization check for this method
     public async Task<PagedResultDto<AuthorDto>> GetListAsync(GetAuthorListDto input)
     {
         if (input.Sorting.IsNullOrWhiteSpace())

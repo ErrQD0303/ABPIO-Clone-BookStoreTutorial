@@ -20,7 +20,7 @@ public class BookStorePermissionDefinitionProvider : PermissionDefinitionProvide
 
         // Authors Permissions
         var authorsPermission = bookStoreGroup.AddPermission(
-    BookStorePermissions.Authors.Default, L("Permission:Authors"));
+            BookStorePermissions.Authors.Default, L("Permission:Authors"));
         authorsPermission.AddChild(
             BookStorePermissions.Authors.Create, L("Permission:Authors.Create"));
         authorsPermission.AddChild(
